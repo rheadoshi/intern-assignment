@@ -1,14 +1,19 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-
+import cors from 'cors'; 
 import main from "./main";
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5321;
 
 app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST' ],
+  allowedHeaders: ['Content-Type'],
+}));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
